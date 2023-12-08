@@ -98,18 +98,23 @@ class Router {
         $this->routes['any'][$path] = $callback;
     }
 
-    public function resolve() {
+    /**
+     * Resolves the request uri and method with callback
+     * 
+     * @return mixed
+     */
+    public function resolve():mixed {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? null;
 
         if (is_null($callback)) {
             $this->response->status(404);
-            $this->render("errors/404");
+            return $this->render("errors/404");
         }
         
         if (is_string($callback)) {
-            $this->render($callback);
+            return $this->render($callback);
         }
         
         if (is_array($callback)) {
@@ -128,7 +133,7 @@ class Router {
      */
     public function render(string $route, array $params = []):string {
         $view_content = $this->renderView($route, $params);
-        return $this->renderContent($view_content);
+        return $this->renderContent($view_content, $params);
     }
 
     /**
@@ -136,9 +141,9 @@ class Router {
      * 
      * @param string view
      * @param array params
-     * @return bool|string
+     * @return string
      */
-    public function renderView (string $view, array $params = []):bool|string {
+    public function renderView (string $view, array $params):string {
         foreach ($params as $key => $value) {
             $$key = $value;
         }
@@ -151,12 +156,11 @@ class Router {
     /**
      * Renders the base view for html view
      * 
-     * @return bool|string
+     * @param array params
+     * @return string
      */
-    public function renderBase():bool|string {
-        ob_start();
-        include_once Application::$ROOT_DIR . "/src/views/base.php";
-        return ob_get_clean();
+    public function renderBase(array $params):string {
+        return $this->renderView("base", $params);
     }
 
     /**
@@ -165,8 +169,8 @@ class Router {
      * @param string content
      * @return string
      */
-    public function renderContent(string $content):string {
-        $base_layout = $this->renderBase();
+    public function renderContent(string $content, array $params):string {
+        $base_layout = $this->renderBase($params);
         return str_replace("{{ content }}", $content, $base_layout);
     }
 }

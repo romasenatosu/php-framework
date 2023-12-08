@@ -9,4 +9,4 @@
 
 # some files
 .env
-.errors.log
+errors.log
