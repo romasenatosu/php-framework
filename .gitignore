@@ -1,0 +1,14 @@
+# security files
+.env
+
+# editors and IDEs
+/.vs/
+/.vscode/
+/.idea/
+
+# client side files
+/src/storage/**
+
+# modules
+/vendor/
+/node_modules/
