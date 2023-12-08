@@ -7,7 +7,6 @@ My own php framework
 <ul>
     <li>$ composer install</li>
     <li>$ npm i</li>
-    <li></li>
 </ul>
 
 # Requirements

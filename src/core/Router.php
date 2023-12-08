@@ -4,16 +4,21 @@ namespace inserveofgod\core;
 
 /**
  * class Router
- * 
+ * @package inserveofgod\core
  */
 class Router {
-    protected $routes = array();
+    protected array $routes = array();
+
+    private Request $request;
+    private Response $response;
 
     /**
-     * 
+     * @param Request request
+     * @param Response response
      */
-    function __construct() {
-
+    function __construct(Request $request, Response $response) {
+        $this->request = $request;
+        $this->response = $response;
     }
 
     /**
@@ -23,7 +28,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function get(string $path, mixed $callback) {
+    public function get(string $path, mixed $callback):void {
         $this->routes['get'][$path] = $callback;
     }
 
@@ -34,7 +39,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function post(string $path, mixed $callback) {
+    public function post(string $path, mixed $callback):void {
         $this->routes['post'][$path] = $callback;
     }
 
@@ -45,7 +50,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function put(string $path, mixed $callback) {
+    public function put(string $path, mixed $callback):void {
         $this->routes['put'][$path] = $callback;
     }
 
@@ -56,7 +61,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function delete(string $path, mixed $callback) {
+    public function delete(string $path, mixed $callback):void {
         $this->routes['delete'][$path] = $callback;
     }
 
@@ -67,7 +72,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function options(string $path, mixed $callback) {
+    public function options(string $path, mixed $callback):void {
         $this->routes['options'][$path] = $callback;
     }
 
@@ -78,7 +83,7 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function patch(string $path, mixed $callback) {
+    public function patch(string $path, mixed $callback):void {
         $this->routes['patch'][$path] = $callback;
     }
 
@@ -89,10 +94,79 @@ class Router {
      * @param mixed callback
      * @return void
      */
-    public function any(string $path, mixed $callback) {
+    public function any(string $path, mixed $callback):void {
         $this->routes['any'][$path] = $callback;
     }
 
+    public function resolve() {
+        $path = $this->request->getPath();
+        $method = $this->request->getMethod();
+        $callback = $this->routes[$method][$path] ?? null;
 
+        if (is_null($callback)) {
+            $this->response->status(404);
+            $this->render("errors/404");
+        }
+        
+        if (is_string($callback)) {
+            $this->render($callback);
+        }
+        
+        if (is_array($callback)) {
+            $callback[0] = new $callback[0]();
+        }
+
+        return call_user_func($callback, $this->request, $this->response);
+    }
+
+    /**
+     * Renders the html view for desired route
+     * 
+     * @param string route
+     * @param array params
+     * @return string
+     */
+    public function render(string $route, array $params = []):string {
+        $view_content = $this->renderView($route, $params);
+        return $this->renderContent($view_content);
+    }
+
+    /**
+     * Renders the desired view for html view
+     * 
+     * @param string view
+     * @param array params
+     * @return bool|string
+     */
+    public function renderView (string $view, array $params = []):bool|string {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+
+        ob_start();
+        include_once Application::$ROOT_DIR . "/src/views/$view.php";
+        return ob_get_clean();
+    }
+
+    /**
+     * Renders the base view for html view
+     * 
+     * @return bool|string
+     */
+    public function renderBase():bool|string {
+        ob_start();
+        include_once Application::$ROOT_DIR . "/src/views/base.php";
+        return ob_get_clean();
+    }
+
+    /**
+     * Renders the desired content for html view
+     * 
+     * @param string content
+     * @return string
+     */
+    public function renderContent(string $content):string {
+        $base_layout = $this->renderBase();
+        return str_replace("{{ content }}", $content, $base_layout);
+    }
 }
-

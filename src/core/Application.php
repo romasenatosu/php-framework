@@ -4,22 +4,33 @@ namespace inserveofgod\core;
 
 /**
  * class Application
- * 
+ * @package inserveofgod\core
  */
 class Application {
-    /**
-     * 
-     */
-    function __construct() {
+    public static Application $app;
+    public static string $ROOT_DIR;
+    public Request $request;
+    public Response $response;
+    public Router $router;
 
+    /**
+     * @param string root_dir
+     */
+    function __construct(string $root_dir) {
+        self::$ROOT_DIR = $root_dir;
+        self::$app = $this;
+
+        $this->request = new Request();
+        $this->response = new Response();
+        $this->router = new Router($this->request, $this->response);
     }
 
     /**
-     * Temporary Function
+     * Runs the application
      * 
      * @return void
      */
-    public function temp() {
-
+    public function run():void {
+        echo $this->router->resolve();
     }
 }
