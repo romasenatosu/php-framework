@@ -3,6 +3,7 @@
 namespace inserveofgod\controllers;
 
 use inserveofgod\core\Request;
+use inserveofgod\models\User;
 
 /**
  * class AuthController
@@ -20,11 +21,18 @@ class AuthController extends Controller {
     }
 
     public function register(Request $request) {
+        $User = new User();
+
         if ($request->isPost()) {
-            var_dump($request->getBody());
+            $User->loadData($request->getBody());
+
+            if ($User->validate()) {
+                return "success. Redirecting...";
+            }
         }
 
         return $this->render('auth/register', [
+            'user' => $User,
             'auth' => true,
         ]);
     }

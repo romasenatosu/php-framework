@@ -8,14 +8,7 @@ use inserveofgod\core\Application;
  * class Controller
  * @package inserveofgod\controllers
  */
-class Controller {
-    /**
-     * 
-     */
-    function __construct() {
-
-    }
-
+abstract class Controller {
     /**
      * An alias function for render in Router
      * 
