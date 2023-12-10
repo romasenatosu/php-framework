@@ -1,10 +1,10 @@
 <?php
 
-namespace inserveofgod\models;
+namespace inserveofgod\src\models;
 
 /**
  * class User
- * @package inserveofgod\models
+ * @package inserveofgod\src\models
  */
 class User extends Model {
     public int $id = 0;

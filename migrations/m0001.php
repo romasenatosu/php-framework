@@ -2,6 +2,11 @@
 
 use inserveofgod\core\Application;
 
+/**
+ * class m0001
+ * 
+ * @package inserveofgod\core\Application
+ */
 class m0001 {
     function up() {
         $sql = "CREATE TABLE IF NOT EXISTS `users` (

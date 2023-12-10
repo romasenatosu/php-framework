@@ -1,10 +1,10 @@
 <?php
 
-namespace inserveofgod\models;
+namespace inserveofgod\src\models;
 
 /**
  * class Model
- * @package inserveofgod\models
+ * @package inserveofgod\src\models
  */
 abstract class Model {
     public const RULE_REQUIRED = "required";

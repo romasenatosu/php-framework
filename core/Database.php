@@ -33,12 +33,12 @@ class Database {
         $this->createMigrationsTable();
         $applied_migrations = $this->getAppliedMigrations();
 
-        $migration_files = scandir(Application::$ROOT_DIR . '/src/migrations');
+        $migration_files = scandir(Application::$ROOT_DIR . '/migrations');
         $migrate_files = array_diff($migration_files, $applied_migrations);
         $migrations = [];
 
         foreach ($migrate_files as $file) {
-            $source = Application::$ROOT_DIR . '/src/migrations/' . $file;
+            $source = Application::$ROOT_DIR . '/migrations/' . $file;
 
             if (is_file($source)) {
                 require_once $source;

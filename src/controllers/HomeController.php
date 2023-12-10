@@ -1,6 +1,6 @@
 <?php
 
-namespace inserveofgod\controllers;
+namespace inserveofgod\src\controllers;
 
 /**
  * class HomeController

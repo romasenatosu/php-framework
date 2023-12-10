@@ -1,9 +1,9 @@
 <?php
 
-namespace inserveofgod\controllers;
+namespace inserveofgod\src\controllers;
 
 use inserveofgod\core\Request;
-use inserveofgod\models\User;
+use inserveofgod\src\models\User;
 
 /**
  * class AuthController

@@ -2,7 +2,7 @@
 
 namespace inserveofgod\forms;
 
-use inserveofgod\models\Model;
+use inserveofgod\src\models\Model;
 
 /**
  * class Form

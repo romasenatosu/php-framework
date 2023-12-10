@@ -6,9 +6,9 @@ ini_set('display_startup_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/../errors.log');
 
-use inserveofgod\controllers\AuthController;
+use inserveofgod\src\controllers\AuthController;
 use inserveofgod\core\Application;
-use inserveofgod\controllers\HomeController;
+use inserveofgod\src\controllers\HomeController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
