@@ -1,10 +1,10 @@
 <?php
 
-namespace inserveofgod\src\controllers;
+namespace romasenatosu\src\controllers;
 
 /**
  * class HomeController
- * @package inserveofgod\controllers
+ * @package romasenatosu\controllers
  */
 class HomeController extends Controller {
     public function index() {

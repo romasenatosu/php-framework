@@ -1,16 +1,16 @@
 {
-    "name": "black/inserveofgod",
+    "name": "black/romasenatosu",
     "description": "My own php framework",
     "type": "framework",
     "autoload": {
         "psr-4": {
-            "inserveofgod\\": "./"
+            "romasenatosu\\": "./"
         }
     },
     "authors": [
         {
-            "name": "inserveofgod",
-            "email": "inserveofgod@gmail.com"
+            "name": "romasenatosu",
+            "email": "roma.senatosu@gmail.com"
         }
     ],
     "require": {

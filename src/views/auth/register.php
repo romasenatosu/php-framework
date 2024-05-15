@@ -1,5 +1,5 @@
 <?php
-    use inserveofgod\forms\Form;
+    use romasenatosu\forms\Form;
 ?>
 
 <div class="d-flex align-items-center justify-content-center vh-100">

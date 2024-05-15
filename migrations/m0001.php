@@ -1,15 +1,15 @@
 <?php
 
-use inserveofgod\core\Application;
+use romasenatosu\core\Application;
 
 /**
  * class m0001
  * 
- * @package inserveofgod\core\Application
+ * @package romasenatosu\core\Application
  */
 class m0001 {
     function up() {
-        $sql = "CREATE TABLE IF NOT EXISTS `users` (
+        $sql = "CREATE TABLE IF NOT EXISTS `user` (
             `id` INT AUTO_INCREMENT PRIMARY KEY,
             `fullname` VARCHAR(64) NOT NULL,
             `username` VARCHAR(32) NOT NULL UNIQUE KEY,
@@ -17,7 +17,7 @@ class m0001 {
             `password` VARCHAR(255) NOT NULL,
             `is_admin` TINYINT(1) DEFAULT 0 NOT NULL,
             `created_at` TIMESTAMP NOT NULL,
-            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            `updated_at` TIMESTAMP NOT NULL,
             `deleted_at` TIMESTAMP DEFAULT NULL
         ) ENGINE=INNODB";
 

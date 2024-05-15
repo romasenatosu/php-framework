@@ -1,18 +1,27 @@
 <?php
 
-namespace inserveofgod\src\controllers;
+namespace romasenatosu\src\controllers;
 
-use inserveofgod\core\Request;
-use inserveofgod\src\models\User;
+use romasenatosu\core\Request;
+use romasenatosu\src\models\User;
 
 /**
  * class AuthController
- * @package inserveofgod\controllers
+ * @package romasenatosu\controllers
  */
 class AuthController extends Controller {
     public function login(Request $request) {
+        if ($request->isGet()) {
+            $User = new User();
+        }
+
         if ($request->isPost()) {
-            var_dump($request->getBody());
+            $User->loadData($request->getBody());
+            
+            if ($User->validate()) {
+                $User->create();
+                $this->redirect("/");
+            }
         }
 
         return $this->render('auth/login', [
@@ -22,12 +31,14 @@ class AuthController extends Controller {
 
     public function register(Request $request) {
         $User = new User();
-
+ 
         if ($request->isPost()) {
             $User->loadData($request->getBody());
-
+            
             if ($User->validate()) {
-                return "success. Redirecting...";
+                $User->create();
+                $this->addFlash("success", "You are registered");
+                $this->redirect("/login");
             }
         }
 
@@ -35,5 +46,10 @@ class AuthController extends Controller {
             'user' => $User,
             'auth' => true,
         ]);
+    }
+
+    public function logout() {
+        $this->removeUser();
+        $this->redirect('/register');
     }
 }

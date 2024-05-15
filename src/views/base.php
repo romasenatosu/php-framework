@@ -26,26 +26,54 @@
 
 <body>
     <?php
-        if (!isset($auth)):
-    ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav me-auto">
-                    <a class="nav-link" href="/">Home</a>
-                </div>
 
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/login">Login</a>
-                    <a class="nav-link" href="/register">Register</a>
+    use romasenatosu\core\Application;
+    var_dump($_SESSION);
+
+    if (!isset($auth)):
+        ?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav me-auto">
+                        <a class="nav-link" href="/">Home</a>
+                    </div>
+
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                    </div>
                 </div>
             </div>
+        </nav>
+        <?php
+    endif;
+    ?>
+
+    <?php
+        $alerts = Application::$app->session->getFlashes();
+        if (count($alerts) > 0):
+    ?>
+
+        <div class="container py-3">
+            <?php
+                foreach ($alerts as $alert):
+            ?>
+                <div class="alert alert-<?= $alert['type'] ?> alert-dismissible fade show" role="alert">
+                    <strong>
+                        <?= $alert['message'] ?>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php
+                endforeach;
+            ?>
         </div>
-    </nav>
+
     <?php
         endif;
     ?>

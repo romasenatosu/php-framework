@@ -1,10 +1,10 @@
 <?php
 
-namespace inserveofgod\core;
+namespace romasenatosu\core;
 
 /**
  * class Router
- * @package inserveofgod\core
+ * @package romasenatosu\core
  */
 class Router {
     protected array $routes = array();

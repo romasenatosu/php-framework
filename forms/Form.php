@@ -1,13 +1,13 @@
 <?php
 
-namespace inserveofgod\forms;
+namespace romasenatosu\forms;
 
-use inserveofgod\src\models\Model;
+use romasenatosu\src\models\Model;
 
 /**
  * class Form
  * 
- * @package inserveofgod\forms
+ * @package romasenatosu\forms
  */
 class Form {
     /**

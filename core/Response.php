@@ -1,10 +1,10 @@
 <?php
 
-namespace inserveofgod\core;
+namespace romasenatosu\core;
 
 /**
  * class Response
- * @package inserveofgod\core
+ * @package romasenatosu\core
  */
 class Response {
     /**

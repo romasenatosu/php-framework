@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/../errors.log');
 
-use inserveofgod\core\Application;
+use romasenatosu\core\Application;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

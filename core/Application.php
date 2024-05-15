@@ -1,18 +1,19 @@
 <?php
 
-namespace inserveofgod\core;
+namespace romasenatosu\core;
 
 /**
  * class Application
- * @package inserveofgod\core
+ * @package romasenatosu\core
  */
 class Application {
     public static Application $app;
     public static string $ROOT_DIR;
     public Request $request;
     public Response $response;
-    public Database $database;
+    public Session $session;
     public Router $router;
+    public Database $database;
 
     /**
      * @param string root_dir
@@ -24,8 +25,8 @@ class Application {
 
         $this->request = new Request();
         $this->response = new Response();
+        $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
-
         $this->database = new Database($enviro_config['db']);
     }
 

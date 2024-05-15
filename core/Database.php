@@ -1,12 +1,12 @@
 <?php
 
-namespace inserveofgod\core;
+namespace romasenatosu\core;
 
 use PDO;
 
 /**
  * class Database
- * @package inserveofgod\core
+ * @package romasenatosu\core
  */
 class Database {
     public PDO $pdo;
